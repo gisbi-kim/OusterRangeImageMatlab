@@ -1,0 +1,27 @@
+function ptcloud = readOusterBinIRAP(bin_path)
+
+%% Information: 
+% x
+% y
+% z
+% intensity
+% ring
+% range
+% noise
+% reflectivity
+
+
+%% Read 
+fid = fopen(bin_path, 'rb'); raw_data = fread(fid, [8 inf], 'single'); fclose(fid);
+points_info = raw_data';
+
+points_xyz = points_info(:, [1,2,3]);
+points_xyz_pc = pointCloud(points_xyz);
+points_xyz_pc.Intensity = points_info(:, 4);
+figure(1); clf;
+pcshow()
+
+disp(1);
+
+end % end of function
+
